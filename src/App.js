@@ -1,7 +1,5 @@
-import logo from './logo.svg';
 import './App.css';
 import { Line } from 'react-chartjs-2';
-import { faker } from '@faker-js/faker';
 import {
   Chart as ChartJS,
   CategoryScale,
