@@ -29,6 +29,11 @@ const App = () => {
   const [motordata, setMotordata] = useState('');
     useEffect(() => {
       GraphLine()
+      const id = setInterval(() => {
+        GraphLine()
+        console.log('loop start')
+      }, 5 * 1000)
+      return () => clearInterval(id)
     }, [])
   const GraphLine = async () => {
     axios.get('http://localhost:4000/motor').then((result) => {
@@ -44,13 +49,41 @@ const App = () => {
       },
       title: {
         display: true,
-        text: 'Chart.js Line Chart',
+        text: 'MotorEV Voltage',
       },
     },
     scales: {
+      x: {
+        display: true,
+        title: {
+          display: true,
+          text: 'Frequency',
+          color: '#911',
+          font: {
+            family: 'Comic Sans MS',
+            size: 20,
+            weight: 'bold',
+            lineHeight: 1.2,
+          },
+          padding: {top: 20, left: 0, right: 0, bottom: 0}
+        }
+      },
       y: {
-        min: 100,
-        max: 120,
+        display: true,
+        title: {
+          display: true,
+          text: 'Current',
+          color: '#191',
+          font: {
+            family: 'Times',
+            size: 20,
+            style: 'normal',
+            lineHeight: 1.2
+          },
+          padding: {top: 30, left: 0, right: 0, bottom: 0}
+        },
+        min: -5,
+        max: 5,
       }
     }
   };
@@ -59,14 +92,14 @@ const App = () => {
     labels,
     datasets: [
       {
-        label: 'Voltage In',
-        data: motordata ? motordata.map(x => x.voltageIn) : [],
+        label: 'Current In',
+        data: motordata ? motordata.map(x => x.currentIn) : [],
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgba(255, 99, 132, 0.5)',
       },
       {
-        label: 'Voltage Out',
-        data: motordata ? motordata.map(x => x.voltageOut) : [],
+        label: 'Current Out',
+        data: motordata ? motordata.map(x => x.currentOut) : [],
         borderColor: 'rgb(53, 162, 235)',
         backgroundColor: 'rgba(53, 162, 235, 0.5)',
       },
