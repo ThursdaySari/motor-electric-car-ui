@@ -85,24 +85,32 @@ const App = () => {
       }
     }
   };
-  const labels = motordata ? motordata.map((x, i) => (i+1)) : [];
   const data = {
-    labels,
+    labels: motordata ? motordata.slice(-5).map((x, i) => (i + 1)) : [],
     datasets: [
       {
         label: 'Current In',
-        data: motordata ? motordata.map(x => x.currentIn) : [],
+        data: motordata
+          ? motordata
+              .slice(-5)
+              .map(x => x.currentIn)
+          : [],
         borderColor: 'rgb(255, 99, 132)',
         backgroundColor: 'rgba(255, 99, 132, 0.5)',
       },
       {
         label: 'Current Out',
-        data: motordata ? motordata.map(x => x.currentOut) : [],
+        data: motordata
+          ? motordata
+              .slice(-5)
+              .map(x => x.currentOut)
+          : [],
         borderColor: 'rgb(53, 162, 235)',
         backgroundColor: 'rgba(53, 162, 235, 0.5)',
       },
     ],
-  };
+};
+
   return (
     <div className="App">
       <header className="App-header">
