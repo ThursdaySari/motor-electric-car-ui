@@ -30,7 +30,7 @@ const App = () => {
       const id = setInterval(() => {
         GraphLine()
         console.log('loop start')
-      }, 5 * 1000)
+      }, 1 * 1000)
       return () => clearInterval(id)
     }, [])
   const GraphLine = async () => {
@@ -40,6 +40,7 @@ const App = () => {
     })
   }
   const options = {
+    position: 'left',
     responsive: true,
     plugins: {
       legend: {
